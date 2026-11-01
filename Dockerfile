@@ -4,9 +4,9 @@
 # Produces static HTML/JS/CSS under frontend/dist.
 FROM node:22-bookworm-slim AS frontend-build
 WORKDIR /app/frontend
-COPY Frontend/package.json frontend/package-lock.json ./
+COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install --no-audit --no-fund --legacy-peer-deps
-COPY Frontend/ ./
+COPY frontend/ ./
 # Empty = browser calls /api on the same host as the page.
 ENV VITE_API_URL=
 # Public Clerk key is embedded in client JS.
@@ -18,9 +18,9 @@ RUN npm run build
 # This backend is ESM JavaScript, so npm run build copies src/ to dist/.
 FROM node:22-bookworm-slim AS backend-build
 WORKDIR /app/backend
-COPY Backend/package.json backend/package-lock.json ./
+COPY backend/package.json backend/package-lock.json ./
 RUN npm install --no-audit --no-fund
-COPY Backend/ ./
+COPY backend/ ./
 RUN npm run build
 
 # --- Stage 3: runtime image (only prod deps + built assets) ---
