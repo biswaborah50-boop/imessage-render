@@ -8,6 +8,9 @@ import { clerkMiddleware } from '@clerk/express'
 import User from "./models/user.model.js";
 import { connectDb } from "./lib/db.js";
 import clerkWebhook from "./webhooks/clerk.webhook.js"
+import authRoutes from "./routes/auth.route.js";
+
+
 
 
 
@@ -28,7 +31,9 @@ app.use(clerkMiddleware())
 
 app.get("/health",(req, res)=>{
     res.status(200).json({ok:true})
-})
+});
+
+app.use("/api/auth",authRoutes)
 
 if(fs.existsSync(publicDir)){
 
