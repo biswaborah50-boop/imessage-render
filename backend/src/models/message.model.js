@@ -23,6 +23,6 @@ video:{
 
 }, {timestamps:true})
 
-const Message = mongoose.model("Message")
+const Message = mongoose.model("Message", messageSchema)
 
 export default Message
