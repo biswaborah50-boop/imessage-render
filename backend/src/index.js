@@ -6,7 +6,7 @@ import fs from "fs";
 import path from "path";
 import { clerkMiddleware } from '@clerk/express'
 import User from "./models/user.model.js";
-import { connectDb } from "./lib/db.js";
+import { connectDB } from "./lib/db.js";
 import clerkWebhook from "./webhooks/clerk.webhook.js"
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
@@ -46,7 +46,7 @@ if(fs.existsSync(publicDir)){
 }
 
 server.listen(PORT,()=>{
-    connectDb();
+    connectDB();
     console.log("Server is up and running on PORT ",PORT);
 
     
